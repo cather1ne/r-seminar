@@ -1,5 +1,5 @@
 # Basic R
 
-# Download & Install
-Install [R](https://www.r-project.org/)
-Install [R Studio](https://www.rstudio.com/)
+## Download & Install
+1. Install [R](https://www.r-project.org/) 
+2. Install [R Studio](https://www.rstudio.com/)
