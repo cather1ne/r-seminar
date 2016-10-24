@@ -8,10 +8,13 @@
 [Hadley Wickham's R Style Guide](http://adv-r.had.co.nz/Style.html)
 
 ## Interactive R learning
-[Swirl](http://swirlstats.com/)
-1. `install.packages("swirl")`
-2. `library(swirl)`
-3. `swirl()`
+[Try Swirl](http://swirlstats.com/)
+
+```r
+install.packages("swirl")
+library(swirl)
+swirl()
+```
 
 ## Advanced R
 [Advanced R by Hadley Wickham](http://adv-r.had.co.nz/)
