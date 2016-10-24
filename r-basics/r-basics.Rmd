@@ -1,0 +1,224 @@
+---
+title: "R Basics"
+author: "Catherine Yu"
+date: "10/24/2016"
+output: html_document
+---
+
+# 0.0 References
+[Hadley Wickham's R Style Guide] (http://adv-r.had.co.nz/Style.html)
+
+# 1.1 Variable Assignment
+Which to use? `<-` vs. `=`
+
+Answer: _Always_ use `<-`
+```{r arrow or equal}
+# GOOD
+x <- 5
+
+# BAD
+x = 5
+```
+
+Also _always_ surround your operations and assignments with spaces.
+```{r spaces, results = "hide"}
+# WHAT IS THIS?
+x<-3
+
+# DOES IT MEAN...
+x <- 3 
+
+# OR DOES IT MEAN...
+x < -3
+```
+
+# 1.2 Basic Operations
+```{r basic operations}
+a <- c(1, 2, 3, 4)
+a + 5
+a - 10
+a * 2
+a / 5
+```
+
+```{r more complex operations}
+sqrt(a)
+exp(a)
+log(a)
+exp(log(a))
+```
+
+# 1.3 Index
+*R uses 1-based indexing
+*Negative indices returns all values EXCEPT at those positions
+```{r index}
+index_vec <- c("azuki", "cat", "dog")
+index_vec[1]
+index_vec[c(-2, -3)]
+```
+
+# 1.4 Data Structures
+
+type | Homogenous | Heterogenous|
+-----|------------|-------------|
+ 1D  | Vector     | Lists       |
+ 2D  | Matrix     | Data Frames |
+ nd  | Array      |             |
+
+Vector `c()` and Lists `list()`
+```{r 1D data structures}
+b <- c(4:8, a)
+class(b)
+
+c <- c("John", "Jane")
+class(c)
+
+d <- c(b, c)
+class(d)
+d
+
+d <- list(b, c)
+d
+class(d)
+class(d[[1]])
+class(d[[2]])
+```
+
+``` {r 1D tips}
+# Labeling each element in a vector
+decile_values <- 1:10
+names(decile_values) <- c("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%")
+decile_values
+
+# Can call vector value by the label
+decile_values["10%"]
+
+# Slice and dice
+which(decile_values > 5)
+which.min(decile_values)
+which.max(decile_values)
+
+# Vectors of repetitive values
+rep(1:2, each = 3)
+rep(1:2, times = 3)
+```
+
+Matrices and Data Frames
+```{r 2D data structures}
+# By default, fills in column-wise
+matrix(1:12, nrow = 4,  
+       dimnames = list(
+         c("one", "two", "three", "four"),
+         c("a", "b", "c")))
+
+# Can use `byrow` argument to fill int row-wise
+matrix(1:12, nrow = 4, byrow = TRUE, 
+       dimnames = list(
+         c("one", "two", "three", "four"),
+         c("a", "b", "c")))
+
+# Data Frames
+ex_df <- data.frame("names"     = c("azuki", "cat", "jen", "kevin"),
+                    "timestamp" = rep(format(Sys.time()), times = 4),
+                    "strings"   = c("HELLO", "PLZ", "SEND", "HALPZ"),
+                    "numbers"   = 9:12,
+                    stringsAsFactors = F)
+ex_df
+class(ex_df)
+str(ex_df)
+```
+
+```{r data frame tips}
+names(ex_df)
+dim(ex_df)
+
+# Add new column
+ex_df$books <- c("arabian nights", "huckleberry finn", "alice in wonderland", "pride and prejudice")
+ex_df
+
+# Append a new row
+ex_df <- rbind(ex_df, data.frame("names"     = "nicky",
+                                 "timestamp" = format(Sys.time()),
+                                 "strings"   = "IMMEDIATELY",
+                                 "numbers"   = 13,
+                                 "books"     = "gone girl"))
+
+# Delete column
+ex_df$books <- NULL
+ex_df
+
+# Delete row
+ex_df[-nrow(ex_df),]
+ex_df
+
+ex_df <- ex_df[-nrow(ex_df),]
+ex_df
+```
+
+# 1.5 How to ask R for help?
+```{r help, results = "hide"}
+# ? gets you to the documentation for specific functions/calls
+?data.frame
+?c
+?rep
+
+# ?? when you have no idea what functions/calls/library you need
+??dataframe
+??regression
+```
+
+# 1.6 Packages and Libraries
+```{r pkg, eval = FALSE}
+# If package is on CRAN
+install.packages("swirl")
+install.packages("data.table")
+
+# Loading libraries
+library(swirl)
+library(data.table)
+```
+
+# 1.7 Working Directory & Environment
+```{r wd, results = "hide"}
+# Current working directory
+getwd()
+
+# Change working directory
+setwd("~/Source/r-seminar/")
+getwd()
+
+# All objects in the environment
+ls()
+```
+
+# 1.8 Reading in data from database
+```{r, results = "hide"}
+library(RMySQL)
+library(zdsdb)
+
+# 0 - connect to db
+conn_client <- connectToDb(dbhost = "di-abvrds1.zephyr-intranet.com",
+                           dbschema = "zdb_abv")
+```
+```{r reading data from db}
+
+# 1 - get data
+query <- "SELECT * FROM ProviderTopicSummaries PTS WHERE PTS.topicId = 68;"
+results <- suppressWarnings(dbGetQuery(conn_client, query))
+
+# 2 - what do we have?
+dim(results)
+str(results)
+
+unique(results$topicId)
+summary(results$defaultScore)
+table(results$leadershipCount, results$guidelinesCount)
+```
+
+# 1.8 Reading in data sets
+[Decapitated Animals Dataset](https://github.com/uselesspress/decapitated-animals-data)
+```{r reading csv}
+dat <- read.csv("../data/raw/animals.csv", stringsAsFactors = F)
+```
+See `decap_analysis.R` for sample analysis
+
