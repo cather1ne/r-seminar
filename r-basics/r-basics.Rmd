@@ -64,6 +64,7 @@ logical  | TRUE(1)/FALSE(0)  |
 numeric  | 12.3, 5, 999      |
 integer  | 2L, 34L, 0L       |
 character| "good", "bad", "2"|
+factor   | "F", "M"          |
 
 Data Structures:
 
@@ -248,5 +249,5 @@ head(results)
 dat <- read.csv("../data/raw/01_animals.csv", stringsAsFactors = F)
 write.csv(dat, "../data/processed/01_animals_output.csv", row.names = F)
 ```
-See `decap_analysis.R` for sample analysis
+See `01_decap_analysis.R` for sample analysis
 

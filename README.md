@@ -30,5 +30,5 @@ swirl()
     * `/data/raw/01_animals.csv` 
     * Sample analysis in `/analysis/01_decap_analysis.R`
 2. [An investigation for determining the optimum length of chopsticks](https://www.ncbi.nlm.nih.gov/pubmed/15676839)
-    * `/data/raw/02_choptick-effectiveness.csv` 
+    * `/data/raw/02_chopstick-effectiveness.csv` 
     * Try your hands at this dataset! What's interesting? 
