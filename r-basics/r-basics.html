@@ -124,10 +124,6 @@ $(document).ready(function () {
 </div>
 
 
-<div id="references" class="section level1">
-<h1>0.0 References</h1>
-<p>[Hadley Wickham’s R Style Guide] (<a href="http://adv-r.had.co.nz/Style.html" class="uri">http://adv-r.had.co.nz/Style.html</a>)</p>
-</div>
 <div id="variable-assignment" class="section level1">
 <h1>1.1 Variable Assignment</h1>
 <p>Which to use? <code>&lt;-</code> vs. <code>=</code></p>
@@ -176,8 +172,36 @@ index_vec[1]</code></pre>
 <pre class="r"><code>index_vec[c(-2, -3)]</code></pre>
 <pre><code>## [1] &quot;azuki&quot;</code></pre>
 </div>
-<div id="data-structures" class="section level1">
-<h1>1.4 Data Structures</h1>
+<div id="data-types-data-structures" class="section level1">
+<h1>1.4 Data Types &amp; Data Structures</h1>
+<p>Data Types:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">type</th>
+<th align="left">output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">logical</td>
+<td align="left">TRUE(1)/FALSE(0)</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">12.3, 5, 999</td>
+</tr>
+<tr class="odd">
+<td align="left">integer</td>
+<td align="left">2L, 34L, 0L</td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">“good”, “bad”, “2”</td>
+</tr>
+</tbody>
+</table>
+<p>Data Structures:</p>
 <table>
 <thead>
 <tr class="header">
@@ -208,9 +232,17 @@ index_vec[1]</code></pre>
 <pre class="r"><code>b &lt;- c(4:8, a)
 class(b)</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>is.numeric(b)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.integer(b)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>is.character(b)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>c &lt;- c(&quot;John&quot;, &quot;Jane&quot;)
 class(c)</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>is.character(c)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>d &lt;- c(b, c)
 class(d)</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
@@ -226,6 +258,8 @@ d</code></pre>
 ## [1] &quot;John&quot; &quot;Jane&quot;</code></pre>
 <pre class="r"><code>class(d)</code></pre>
 <pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="r"><code>is.list(d)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>class(d[[1]])</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <pre class="r"><code>class(d[[2]])</code></pre>
@@ -247,9 +281,17 @@ which(decile_values &gt; 5)</code></pre>
 <pre class="r"><code>which.min(decile_values)</code></pre>
 <pre><code>## 10% 
 ##   1</code></pre>
+<pre class="r"><code>min(decile_values)</code></pre>
+<pre><code>## [1] 1</code></pre>
 <pre class="r"><code>which.max(decile_values)</code></pre>
 <pre><code>## 100% 
 ##   10</code></pre>
+<pre class="r"><code>max(decile_values)</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>length(decile_values)</code></pre>
+<pre><code>## [1] 10</code></pre>
+<pre class="r"><code>sum(decile_values &gt; 6)</code></pre>
+<pre><code>## [1] 4</code></pre>
 <pre class="r"><code># Vectors of repetitive values
 rep(1:2, each = 3)</code></pre>
 <pre><code>## [1] 1 1 1 2 2 2</code></pre>
@@ -284,16 +326,16 @@ ex_df &lt;- data.frame(&quot;names&quot;     = c(&quot;azuki&quot;, &quot;cat&qu
                     stringsAsFactors = F)
 ex_df</code></pre>
 <pre><code>##   names           timestamp strings numbers
-## 1 azuki 2016-10-24 16:40:05   HELLO       9
-## 2   cat 2016-10-24 16:40:05     PLZ      10
-## 3   jen 2016-10-24 16:40:05    SEND      11
-## 4 kevin 2016-10-24 16:40:05   HALPZ      12</code></pre>
+## 1 azuki 2016-10-25 15:20:28   HELLO       9
+## 2   cat 2016-10-25 15:20:28     PLZ      10
+## 3   jen 2016-10-25 15:20:28    SEND      11
+## 4 kevin 2016-10-25 15:20:28   HALPZ      12</code></pre>
 <pre class="r"><code>class(ex_df)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>str(ex_df)</code></pre>
 <pre><code>## 'data.frame':    4 obs. of  4 variables:
 ##  $ names    : chr  &quot;azuki&quot; &quot;cat&quot; &quot;jen&quot; &quot;kevin&quot;
-##  $ timestamp: chr  &quot;2016-10-24 16:40:05&quot; &quot;2016-10-24 16:40:05&quot; &quot;2016-10-24 16:40:05&quot; &quot;2016-10-24 16:40:05&quot;
+##  $ timestamp: chr  &quot;2016-10-25 15:20:28&quot; &quot;2016-10-25 15:20:28&quot; &quot;2016-10-25 15:20:28&quot; &quot;2016-10-25 15:20:28&quot;
 ##  $ strings  : chr  &quot;HELLO&quot; &quot;PLZ&quot; &quot;SEND&quot; &quot;HALPZ&quot;
 ##  $ numbers  : int  9 10 11 12</code></pre>
 <pre class="r"><code>names(ex_df)</code></pre>
@@ -304,10 +346,10 @@ ex_df</code></pre>
 ex_df$books &lt;- c(&quot;arabian nights&quot;, &quot;huckleberry finn&quot;, &quot;alice in wonderland&quot;, &quot;pride and prejudice&quot;)
 ex_df</code></pre>
 <pre><code>##   names           timestamp strings numbers               books
-## 1 azuki 2016-10-24 16:40:05   HELLO       9      arabian nights
-## 2   cat 2016-10-24 16:40:05     PLZ      10    huckleberry finn
-## 3   jen 2016-10-24 16:40:05    SEND      11 alice in wonderland
-## 4 kevin 2016-10-24 16:40:05   HALPZ      12 pride and prejudice</code></pre>
+## 1 azuki 2016-10-25 15:20:28   HELLO       9      arabian nights
+## 2   cat 2016-10-25 15:20:28     PLZ      10    huckleberry finn
+## 3   jen 2016-10-25 15:20:28    SEND      11 alice in wonderland
+## 4 kevin 2016-10-25 15:20:28   HALPZ      12 pride and prejudice</code></pre>
 <pre class="r"><code># Append a new row
 ex_df &lt;- rbind(ex_df, data.frame(&quot;names&quot;     = &quot;nicky&quot;,
                                  &quot;timestamp&quot; = format(Sys.time()),
@@ -319,32 +361,32 @@ ex_df &lt;- rbind(ex_df, data.frame(&quot;names&quot;     = &quot;nicky&quot;,
 ex_df$books &lt;- NULL
 ex_df</code></pre>
 <pre><code>##   names           timestamp     strings numbers
-## 1 azuki 2016-10-24 16:40:05       HELLO       9
-## 2   cat 2016-10-24 16:40:05         PLZ      10
-## 3   jen 2016-10-24 16:40:05        SEND      11
-## 4 kevin 2016-10-24 16:40:05       HALPZ      12
-## 5 nicky 2016-10-24 16:40:05 IMMEDIATELY      13</code></pre>
+## 1 azuki 2016-10-25 15:20:28       HELLO       9
+## 2   cat 2016-10-25 15:20:28         PLZ      10
+## 3   jen 2016-10-25 15:20:28        SEND      11
+## 4 kevin 2016-10-25 15:20:28       HALPZ      12
+## 5 nicky 2016-10-25 15:20:28 IMMEDIATELY      13</code></pre>
 <pre class="r"><code># Delete row
 ex_df[-nrow(ex_df),]</code></pre>
 <pre><code>##   names           timestamp strings numbers
-## 1 azuki 2016-10-24 16:40:05   HELLO       9
-## 2   cat 2016-10-24 16:40:05     PLZ      10
-## 3   jen 2016-10-24 16:40:05    SEND      11
-## 4 kevin 2016-10-24 16:40:05   HALPZ      12</code></pre>
+## 1 azuki 2016-10-25 15:20:28   HELLO       9
+## 2   cat 2016-10-25 15:20:28     PLZ      10
+## 3   jen 2016-10-25 15:20:28    SEND      11
+## 4 kevin 2016-10-25 15:20:28   HALPZ      12</code></pre>
 <pre class="r"><code>ex_df</code></pre>
 <pre><code>##   names           timestamp     strings numbers
-## 1 azuki 2016-10-24 16:40:05       HELLO       9
-## 2   cat 2016-10-24 16:40:05         PLZ      10
-## 3   jen 2016-10-24 16:40:05        SEND      11
-## 4 kevin 2016-10-24 16:40:05       HALPZ      12
-## 5 nicky 2016-10-24 16:40:05 IMMEDIATELY      13</code></pre>
+## 1 azuki 2016-10-25 15:20:28       HELLO       9
+## 2   cat 2016-10-25 15:20:28         PLZ      10
+## 3   jen 2016-10-25 15:20:28        SEND      11
+## 4 kevin 2016-10-25 15:20:28       HALPZ      12
+## 5 nicky 2016-10-25 15:20:28 IMMEDIATELY      13</code></pre>
 <pre class="r"><code>ex_df &lt;- ex_df[-nrow(ex_df),]
 ex_df</code></pre>
 <pre><code>##   names           timestamp strings numbers
-## 1 azuki 2016-10-24 16:40:05   HELLO       9
-## 2   cat 2016-10-24 16:40:05     PLZ      10
-## 3   jen 2016-10-24 16:40:05    SEND      11
-## 4 kevin 2016-10-24 16:40:05   HALPZ      12</code></pre>
+## 1 azuki 2016-10-25 15:20:28   HELLO       9
+## 2   cat 2016-10-25 15:20:28     PLZ      10
+## 3   jen 2016-10-25 15:20:28    SEND      11
+## 4 kevin 2016-10-25 15:20:28   HALPZ      12</code></pre>
 </div>
 <div id="how-to-ask-r-for-help" class="section level1">
 <h1>1.5 How to ask R for help?</h1>
@@ -396,22 +438,15 @@ conn_client &lt;- connectToDb(dbhost = &quot;di-abvrds1.zephyr-intranet.com&quot
 ## dec, : EOF within quoted string</code></pre>
 <pre><code>## dbhost argument provided. This takes precedence over dbnick.</code></pre>
 <pre><code>## dbschema argument provided. This takes precedence over dbnick.</code></pre>
-<pre><code>## Unused Local Port Found: 3321</code></pre>
+<pre><code>## Unused Local Port Found: 3309</code></pre>
 <pre><code>## SSH Login URL: cyu@rserv-ds.zephyr-intranet.com</code></pre>
-<pre><code>## Database URL: 3321:di-abvrds1.zephyr-intranet.com:3306</code></pre>
+<pre><code>## Database URL: 3309:di-abvrds1.zephyr-intranet.com:3306</code></pre>
 <pre><code>## SSH tunnel successfully established.</code></pre>
 <pre class="r"><code># 1 - get data
 query &lt;- &quot;SELECT * FROM ProviderTopicSummaries PTS WHERE PTS.topicId = 68;&quot;
-results &lt;- dbGetQuery(conn_client, query)</code></pre>
-<pre><code>## Warning in .local(conn, statement, ...): Unsigned INTEGER in col 0 imported
-## as numeric</code></pre>
-<pre><code>## Warning in .local(conn, statement, ...): unrecognized MySQL field type 7 in
-## column 32 imported as character</code></pre>
-<pre><code>## Warning in .local(conn, statement, ...): unrecognized MySQL field type 7 in
-## column 33 imported as character</code></pre>
-<pre><code>## Warning in .local(conn, statement, ...): Unsigned INTEGER in col 35
-## imported as numeric</code></pre>
-<pre class="r"><code># 2 - what do we have?
+results &lt;- suppressWarnings(dbGetQuery(conn_client, query))
+
+# 2 - what do we have?
 dim(results)</code></pre>
 <pre><code>## [1] 26984    46</code></pre>
 <pre class="r"><code>str(results)</code></pre>
@@ -462,11 +497,43 @@ dim(results)</code></pre>
 ##  $ customerPayments             : num  0 0 0 0 357 ...
 ##  $ customerPaymentsScore        : num  0 0 0 0 75.6 ...
 ##  $ mb_1Score                    : int  0 0 10 0 10 10 0 0 10 0 ...</code></pre>
+<pre class="r"><code>names(results)</code></pre>
+<pre><code>##  [1] &quot;providerTopicSummaryId&quot;        &quot;entityId&quot;                     
+##  [3] &quot;topicId&quot;                       &quot;defaultScore&quot;                 
+##  [5] &quot;researchScore&quot;                 &quot;influenceScore&quot;               
+##  [7] &quot;salesScore&quot;                    &quot;industryEngagementsScore&quot;     
+##  [9] &quot;engagementsScore&quot;              &quot;publicationsCount&quot;            
+## [11] &quot;guidelinesCount&quot;               &quot;clinicalTrialsCount&quot;          
+## [13] &quot;clinicalTrialsScore&quot;           &quot;publicationsScore&quot;            
+## [15] &quot;guidelinesScore&quot;               &quot;interactionsScore&quot;            
+## [17] &quot;medicalInteractionsScore&quot;      &quot;commercialInteractionsScore&quot;  
+## [19] &quot;interactionsCount&quot;             &quot;medicalInteractionsCount&quot;     
+## [21] &quot;commercialInteractionsCount&quot;   &quot;nonPersonalPromotionCount&quot;    
+## [23] &quot;sponsorshipCount&quot;              &quot;speakingEngagementsCount&quot;     
+## [25] &quot;fundingScore&quot;                  &quot;fundingAmount&quot;                
+## [27] &quot;interactionsHQCount&quot;           &quot;interactionsFieldCount&quot;       
+## [29] &quot;leadershipScore&quot;               &quot;leadershipCount&quot;              
+## [31] &quot;speakingEngagementsScore&quot;      &quot;sponsorshipScore&quot;             
+## [33] &quot;createdAt&quot;                     &quot;updatedAt&quot;                    
+## [35] &quot;historicalReferralScore&quot;       &quot;historicalReferralCount&quot;      
+## [37] &quot;referralPotentialScore&quot;        &quot;referralPotentialAccountScore&quot;
+## [39] &quot;referralPotentialPatientScore&quot; &quot;referralPotentialTreaterScore&quot;
+## [41] &quot;referralTreatmentScore&quot;        &quot;industryPayments&quot;             
+## [43] &quot;industryPaymentsScore&quot;         &quot;customerPayments&quot;             
+## [45] &quot;customerPaymentsScore&quot;         &quot;mb_1Score&quot;</code></pre>
+<pre class="r"><code>length(unique(results$entityId))</code></pre>
+<pre><code>## [1] 26984</code></pre>
+<pre class="r"><code>sum(duplicated(results$entityId))</code></pre>
+<pre><code>## [1] 0</code></pre>
 <pre class="r"><code>unique(results$topicId)</code></pre>
 <pre><code>## [1] 68</code></pre>
 <pre class="r"><code>summary(results$defaultScore)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   0.000   0.000   3.593   6.896  10.750  84.700</code></pre>
+<pre class="r"><code>table(results$guidelinesCount)</code></pre>
+<pre><code>## 
+##     0     1     2     3     4     5     6     7     9    10    14    15 
+## 26701   188    50    20     5     7     4     4     1     2     1     1</code></pre>
 <pre class="r"><code>table(results$leadershipCount, results$guidelinesCount)</code></pre>
 <pre><code>##    
 ##         0     1     2     3     4     5     6     7     9    10    14
@@ -486,6 +553,120 @@ dim(results)</code></pre>
 ##   4     0
 ##   5     0
 ##   6     0</code></pre>
+<pre class="r"><code>results &lt;- results[order(-results$defaultScore),]
+head(results)</code></pre>
+<pre><code>##       providerTopicSummaryId entityId topicId defaultScore researchScore
+## 14676                  21969  1270202      68     84.70232     100.00000
+## 20825                  31312  1817554      68     82.59596      89.84484
+## 8900                   13356   768175      68     79.18984      69.79372
+## 778                     1133    65457      68     77.59963      66.02573
+## 1885                    2828   169360      68     77.31643     100.00000
+## 12278                  18370  1062425      68     75.30482      34.92749
+##       influenceScore salesScore industryEngagementsScore engagementsScore
+## 14676       97.59776        100                        0         41.21153
+## 20825      100.00000        100                        0         40.53900
+## 8900        76.96565         70                        0        100.00000
+## 778         96.73480        100                        0         47.63799
+## 1885        93.53769         90                        0         25.72804
+## 12278       85.94573        100                        0         80.34605
+##       publicationsCount guidelinesCount clinicalTrialsCount
+## 14676               135               7                   8
+## 20825               389              10                   8
+## 8900                101               6                   6
+## 778                 203               1                   3
+## 1885                178               6                  11
+## 12278                35               1                   3
+##       clinicalTrialsScore publicationsScore guidelinesScore
+## 14676           100.00000          83.12917        98.57109
+## 20825            66.66667          98.88311        99.22847
+## 8900             60.00000          65.22791        98.24927
+## 778              20.00000          98.47197        99.54813
+## 1885            100.00000          90.70186        95.81062
+## 12278            33.33333          33.27425        99.22847
+##       interactionsScore medicalInteractionsScore
+## 14676          41.21153                 0.447694
+## 20825          40.53900                 0.000000
+## 8900          100.00000               100.000000
+## 778            47.63799                10.375124
+## 1885           25.72804                 0.000000
+## 12278          80.34605                60.307088
+##       commercialInteractionsScore interactionsCount
+## 14676                   34.621652               120
+## 20825                   34.410318                89
+## 8900                    56.596242               162
+## 778                     38.972870                92
+## 1885                     3.256474                10
+## 12278                   55.465401               166
+##       medicalInteractionsCount commercialInteractionsCount
+## 14676                        1                         119
+## 20825                        0                          89
+## 8900                        11                         151
+## 778                          1                          91
+## 1885                         0                          10
+## 12278                        6                         160
+##       nonPersonalPromotionCount sponsorshipCount speakingEngagementsCount
+## 14676                         0                0                       25
+## 20825                         0                0                       17
+## 8900                          0                0                        6
+## 778                           0                0                        8
+## 1885                          0                0                        8
+## 12278                         0                0                        3
+##       fundingScore fundingAmount interactionsHQCount
+## 14676            0             0                   0
+## 20825            0             0                   0
+## 8900             0             0                   0
+## 778              0             0                   0
+## 1885             0             0                   0
+## 12278            0             0                   0
+##       interactionsFieldCount leadershipScore leadershipCount
+## 14676                    120              80               2
+## 20825                     89              95               5
+## 8900                     162               0               0
+## 778                       92              90               4
+## 1885                      10              80               2
+## 12278                    166              40               1
+##       speakingEngagementsScore sponsorshipScore           createdAt
+## 14676                 97.03704                0 2016-10-24 20:38:41
+## 20825                 91.11111                0 2016-10-24 20:38:41
+## 8900                  82.96296                0 2016-10-24 20:38:41
+## 778                   84.44444                0 2016-10-24 20:38:41
+## 1885                  84.44444                0 2016-10-24 20:38:41
+## 12278                 80.74074                0 2016-10-24 20:38:41
+##                 updatedAt historicalReferralScore historicalReferralCount
+## 14676 2016-10-24 20:42:42                       0                       0
+## 20825 2016-10-24 20:42:42                       0                       0
+## 8900  2016-10-24 20:42:42                       0                       0
+## 778   2016-10-24 20:42:42                       0                       0
+## 1885  2016-10-24 20:42:42                       0                       0
+## 12278 2016-10-24 20:42:42                       0                       0
+##       referralPotentialScore referralPotentialAccountScore
+## 14676                      0                             0
+## 20825                      0                             0
+## 8900                       0                             0
+## 778                        0                             0
+## 1885                       0                             0
+## 12278                      0                             0
+##       referralPotentialPatientScore referralPotentialTreaterScore
+## 14676                             0                             0
+## 20825                             0                             0
+## 8900                              0                             0
+## 778                               0                             0
+## 1885                              0                             0
+## 12278                             0                             0
+##       referralTreatmentScore industryPayments industryPaymentsScore
+## 14676                      0         67651.72                98.925
+## 20825                      0        185692.32                99.833
+## 8900                       0         31957.26                97.665
+## 778                        0         14005.74                95.744
+## 1885                       0         31441.62                97.621
+## 12278                      0        210579.11                99.868
+##       customerPayments customerPaymentsScore mb_1Score
+## 14676         60204.96                99.945       100
+## 20825         16972.32                98.496       100
+## 8900          19457.26                98.855        70
+## 778           13540.57                97.885       100
+## 1885          23976.56                99.226        90
+## 12278         39252.73                99.760       100</code></pre>
 </div>
 <div id="reading-in-data-sets" class="section level1">
 <h1>1.8 Reading in data sets</h1>

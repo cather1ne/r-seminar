@@ -1,3 +1,4 @@
+# install.packages(c("data.table", "ggplot2", "maps", "RColorBrewer", "ggmap", "RgoogleMaps"))
 library(data.table)
 library(ggplot2)
 library(maps)
@@ -11,28 +12,40 @@ dat <- data.table(read.csv("data/raw/animals.csv", stringsAsFactors = F))
 # STEP 01: Look at the data ---------------------------------------------------
 dim(dat)
 str(dat)
+names(dat)
+unique(dat$animal)
+unique(dat$body_part_found)
 
 # STEP 02: Clean data ---------------------------------------------------------
 
 # clean dates
+dat$date_started
+dat$date_closed
 dat$date_started <- as.Date(dat$date_started, "%m/%d/%Y")
 dat$date_closed  <- as.Date(dat$date_closed, "%m/%d/%Y")
 
+dat$resolution_action_updated
 dat$resolution_action_updated[1] <- paste0(dat$resolution_action_updated[1], " 00:00:00")
-
 dat$resolution_action_updated <- as.POSIXct(strptime(dat$resolution_action_updated,
                                                      "%m/%d/%Y %H:%M:%S"))
+dat$report_year <- substr(dat$date_started, 1, 4)
 
 # give an unique key to each report
 dat$key <- 1:nrow(dat)
 
-# rearranging columns
+# rearranging columns so 'key' is first
+names(dat)
 colorder <- c(names(dat)[ncol(dat)], names(dat)[1:(ncol(dat) - 1)])
 setcolorder(dat, colorder)
+names(dat)
 
 # each animal species should have it's own entry
 dat_tmp1 <- dat[grep("&", dat$animal), ]
+dat$animal[grep("&", dat$animal)]
+
 dat_tmp1 <- rbind(dat_tmp1, dat[grep(",", dat$animal), ])
+dat$animal[grep(",", dat$animal)]
+
 dat_tmp2 <- dat[setdiff(dat$key, dat_tmp1$key), ]
 
 dat_tmp1$animal <- gsub(", ", " & ", dat_tmp1$animal)
@@ -40,9 +53,10 @@ dat_tmp1$animal <- gsub("and", " & ", dat_tmp1$animal)
 parenthesis_tmp <- gsub("[\\(\\)]", "", regmatches(dat_tmp1$animal, gregexpr("\\(.*?\\)", dat_tmp1$animal)))
 dat_tmp1$animal[which((parenthesis_tmp != "character0") == TRUE)] <- parenthesis_tmp[parenthesis_tmp != "character0"]
 
-# rearranging
+# rearranging so distinct body parts gets it's own entry
 dat_tmp2 <- rbind(dat_tmp2, dat_tmp1[dat_tmp1$key == 33, ], dat_tmp1[dat_tmp1$key == 44, ])
 dat_tmp1 <- dat_tmp1[!dat_tmp1$key %in% dat_tmp2$key, ]
+
 dat_tmp1 <- rbind(dat_tmp1, dat_tmp2[grep("[0-9]", dat_tmp2$body_part_found)])
 dat_tmp2 <- dat_tmp2[!dat_tmp2$key %in% dat_tmp1$key, ]
 
@@ -101,8 +115,10 @@ dat_v1$animal_type <- ifelse(dat_v1$animal %in% c("Dove", "Chicken", "Pigeon",
 dat_v1$animal_type <- ifelse(dat_v1$animal_type %in% c("Goat", "Pig", "Squirrels", "Cat",
                                                        "Lamb", "Dog", "Cow"), "Mammal", dat_v1$animal_type)
 dat_v1$animal_type <- ifelse(dat_v1$animal_type %in% c("Turtle"), "Reptile", dat_v1$animal_type)
+dat_v1$animal_type <- as.factor(dat_v1$animal_type)
 
-dat_v1$report_year <- substr(dat_v1$date_started, 1, 4)
+unique(dat_v1$animal_type)
+table(dat_v1$animal_type)
 
 # recode body parts
 dat_v1$body_part_type <- ifelse(dat_v1$body_part_found %in% c("Head & Rib Cage",
@@ -110,9 +126,10 @@ dat_v1$body_part_type <- ifelse(dat_v1$body_part_found %in% c("Head & Rib Cage",
                                                               "Head & Intestines"),
                                 "Head & Others", dat_v1$body_part_found)
 dat_v1$body_part_type <- tolower(dat_v1$body_part_type)
-
-dat_v1$animal_type <- as.factor(dat_v1$animal_type)
 dat_v1$body_part_type <- as.factor(dat_v1$body_part_type)
+
+unique(dat_v1$body_part_type)
+table(dat_v1$body_part_type)
 
 
 # STEP 03: Visualize ----------------------------------------------------------
