@@ -326,16 +326,16 @@ ex_df &lt;- data.frame(&quot;names&quot;     = c(&quot;azuki&quot;, &quot;cat&qu
                     stringsAsFactors = F)
 ex_df</code></pre>
 <pre><code>##   names           timestamp strings numbers
-## 1 azuki 2016-10-25 15:20:28   HELLO       9
-## 2   cat 2016-10-25 15:20:28     PLZ      10
-## 3   jen 2016-10-25 15:20:28    SEND      11
-## 4 kevin 2016-10-25 15:20:28   HALPZ      12</code></pre>
+## 1 azuki 2016-10-25 16:22:57   HELLO       9
+## 2   cat 2016-10-25 16:22:57     PLZ      10
+## 3   jen 2016-10-25 16:22:57    SEND      11
+## 4 kevin 2016-10-25 16:22:57   HALPZ      12</code></pre>
 <pre class="r"><code>class(ex_df)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <pre class="r"><code>str(ex_df)</code></pre>
 <pre><code>## 'data.frame':    4 obs. of  4 variables:
 ##  $ names    : chr  &quot;azuki&quot; &quot;cat&quot; &quot;jen&quot; &quot;kevin&quot;
-##  $ timestamp: chr  &quot;2016-10-25 15:20:28&quot; &quot;2016-10-25 15:20:28&quot; &quot;2016-10-25 15:20:28&quot; &quot;2016-10-25 15:20:28&quot;
+##  $ timestamp: chr  &quot;2016-10-25 16:22:57&quot; &quot;2016-10-25 16:22:57&quot; &quot;2016-10-25 16:22:57&quot; &quot;2016-10-25 16:22:57&quot;
 ##  $ strings  : chr  &quot;HELLO&quot; &quot;PLZ&quot; &quot;SEND&quot; &quot;HALPZ&quot;
 ##  $ numbers  : int  9 10 11 12</code></pre>
 <pre class="r"><code>names(ex_df)</code></pre>
@@ -346,10 +346,10 @@ ex_df</code></pre>
 ex_df$books &lt;- c(&quot;arabian nights&quot;, &quot;huckleberry finn&quot;, &quot;alice in wonderland&quot;, &quot;pride and prejudice&quot;)
 ex_df</code></pre>
 <pre><code>##   names           timestamp strings numbers               books
-## 1 azuki 2016-10-25 15:20:28   HELLO       9      arabian nights
-## 2   cat 2016-10-25 15:20:28     PLZ      10    huckleberry finn
-## 3   jen 2016-10-25 15:20:28    SEND      11 alice in wonderland
-## 4 kevin 2016-10-25 15:20:28   HALPZ      12 pride and prejudice</code></pre>
+## 1 azuki 2016-10-25 16:22:57   HELLO       9      arabian nights
+## 2   cat 2016-10-25 16:22:57     PLZ      10    huckleberry finn
+## 3   jen 2016-10-25 16:22:57    SEND      11 alice in wonderland
+## 4 kevin 2016-10-25 16:22:57   HALPZ      12 pride and prejudice</code></pre>
 <pre class="r"><code># Append a new row
 ex_df &lt;- rbind(ex_df, data.frame(&quot;names&quot;     = &quot;nicky&quot;,
                                  &quot;timestamp&quot; = format(Sys.time()),
@@ -361,32 +361,32 @@ ex_df &lt;- rbind(ex_df, data.frame(&quot;names&quot;     = &quot;nicky&quot;,
 ex_df$books &lt;- NULL
 ex_df</code></pre>
 <pre><code>##   names           timestamp     strings numbers
-## 1 azuki 2016-10-25 15:20:28       HELLO       9
-## 2   cat 2016-10-25 15:20:28         PLZ      10
-## 3   jen 2016-10-25 15:20:28        SEND      11
-## 4 kevin 2016-10-25 15:20:28       HALPZ      12
-## 5 nicky 2016-10-25 15:20:28 IMMEDIATELY      13</code></pre>
+## 1 azuki 2016-10-25 16:22:57       HELLO       9
+## 2   cat 2016-10-25 16:22:57         PLZ      10
+## 3   jen 2016-10-25 16:22:57        SEND      11
+## 4 kevin 2016-10-25 16:22:57       HALPZ      12
+## 5 nicky 2016-10-25 16:22:57 IMMEDIATELY      13</code></pre>
 <pre class="r"><code># Delete row
 ex_df[-nrow(ex_df),]</code></pre>
 <pre><code>##   names           timestamp strings numbers
-## 1 azuki 2016-10-25 15:20:28   HELLO       9
-## 2   cat 2016-10-25 15:20:28     PLZ      10
-## 3   jen 2016-10-25 15:20:28    SEND      11
-## 4 kevin 2016-10-25 15:20:28   HALPZ      12</code></pre>
+## 1 azuki 2016-10-25 16:22:57   HELLO       9
+## 2   cat 2016-10-25 16:22:57     PLZ      10
+## 3   jen 2016-10-25 16:22:57    SEND      11
+## 4 kevin 2016-10-25 16:22:57   HALPZ      12</code></pre>
 <pre class="r"><code>ex_df</code></pre>
 <pre><code>##   names           timestamp     strings numbers
-## 1 azuki 2016-10-25 15:20:28       HELLO       9
-## 2   cat 2016-10-25 15:20:28         PLZ      10
-## 3   jen 2016-10-25 15:20:28        SEND      11
-## 4 kevin 2016-10-25 15:20:28       HALPZ      12
-## 5 nicky 2016-10-25 15:20:28 IMMEDIATELY      13</code></pre>
+## 1 azuki 2016-10-25 16:22:57       HELLO       9
+## 2   cat 2016-10-25 16:22:57         PLZ      10
+## 3   jen 2016-10-25 16:22:57        SEND      11
+## 4 kevin 2016-10-25 16:22:57       HALPZ      12
+## 5 nicky 2016-10-25 16:22:57 IMMEDIATELY      13</code></pre>
 <pre class="r"><code>ex_df &lt;- ex_df[-nrow(ex_df),]
 ex_df</code></pre>
 <pre><code>##   names           timestamp strings numbers
-## 1 azuki 2016-10-25 15:20:28   HELLO       9
-## 2   cat 2016-10-25 15:20:28     PLZ      10
-## 3   jen 2016-10-25 15:20:28    SEND      11
-## 4 kevin 2016-10-25 15:20:28   HALPZ      12</code></pre>
+## 1 azuki 2016-10-25 16:22:57   HELLO       9
+## 2   cat 2016-10-25 16:22:57     PLZ      10
+## 3   jen 2016-10-25 16:22:57    SEND      11
+## 4 kevin 2016-10-25 16:22:57   HALPZ      12</code></pre>
 </div>
 <div id="how-to-ask-r-for-help" class="section level1">
 <h1>1.5 How to ask R for help?</h1>
@@ -438,9 +438,9 @@ conn_client &lt;- connectToDb(dbhost = &quot;di-abvrds1.zephyr-intranet.com&quot
 ## dec, : EOF within quoted string</code></pre>
 <pre><code>## dbhost argument provided. This takes precedence over dbnick.</code></pre>
 <pre><code>## dbschema argument provided. This takes precedence over dbnick.</code></pre>
-<pre><code>## Unused Local Port Found: 3309</code></pre>
+<pre><code>## Unused Local Port Found: 3310</code></pre>
 <pre><code>## SSH Login URL: cyu@rserv-ds.zephyr-intranet.com</code></pre>
-<pre><code>## Database URL: 3309:di-abvrds1.zephyr-intranet.com:3306</code></pre>
+<pre><code>## Database URL: 3310:di-abvrds1.zephyr-intranet.com:3306</code></pre>
 <pre><code>## SSH tunnel successfully established.</code></pre>
 <pre class="r"><code># 1 - get data
 query &lt;- &quot;SELECT * FROM ProviderTopicSummaries PTS WHERE PTS.topicId = 68;&quot;
@@ -671,7 +671,8 @@ head(results)</code></pre>
 <div id="reading-in-data-sets" class="section level1">
 <h1>1.8 Reading in data sets</h1>
 <p><a href="https://github.com/uselesspress/decapitated-animals-data">Decapitated Animals Dataset</a></p>
-<pre class="r"><code>dat &lt;- read.csv(&quot;../data/raw/animals.csv&quot;, stringsAsFactors = F)</code></pre>
+<pre class="r"><code>dat &lt;- read.csv(&quot;../data/raw/animals.csv&quot;, stringsAsFactors = F)
+write.csv(dat, &quot;../data/processed/animals.csv&quot;, row.names = F)</code></pre>
 <p>See <code>decap_analysis.R</code> for sample analysis</p>
 </div>
 

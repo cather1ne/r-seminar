@@ -244,7 +244,7 @@ head(results)
 
 # 1.8 Reading in data sets
 [Decapitated Animals Dataset](https://github.com/uselesspress/decapitated-animals-data)
-```{r reading csv}
+```{r reading csv, eval = FALSE}
 dat <- read.csv("../data/raw/animals.csv", stringsAsFactors = F)
 write.csv(dat, "../data/processed/animals.csv", row.names = F)
 ```
