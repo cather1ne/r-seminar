@@ -246,6 +246,7 @@ head(results)
 [Decapitated Animals Dataset](https://github.com/uselesspress/decapitated-animals-data)
 ```{r reading csv}
 dat <- read.csv("../data/raw/animals.csv", stringsAsFactors = F)
+write.csv(dat, "../data/processed/animals.csv", row.names = F)
 ```
 See `decap_analysis.R` for sample analysis
 
