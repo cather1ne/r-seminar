@@ -18,3 +18,9 @@ swirl()
 
 ## Advanced R
 [Advanced R by Hadley Wickham](http://adv-r.had.co.nz/)
+
+## R Graphics (ggplot2)
+[R Cookbook](http://www.cookbook-r.com/Graphs/)
+
+## Enhanced Data Frames (data.table)
+[data.table documentation](https://cran.r-project.org/web/packages/data.table/data.table.pdf)
