@@ -24,3 +24,9 @@ swirl()
 
 ## Enhanced Data Frames (data.table)
 [data.table documentation](https://cran.r-project.org/web/packages/data.table/data.table.pdf)
+
+## Datasets
+1. `/data/raw/01_animals.csv` [Decapitated Animals](https://github.com/uselesspress/decapitated-animals-data)
+    * Sample analysis in `/analysis/01_decap_analysis.R`
+2. `/data/raw/02_choptick-effectiveness.csv` [An investigation for determining the optimum length of chopsticks](https://www.ncbi.nlm.nih.gov/pubmed/15676839)
+    * Try your hands at this dataset! What's interesting? 
