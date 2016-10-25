@@ -7,7 +7,7 @@ library(ggmap)
 library(RgoogleMaps)
 
 # STEP 00: Import data --------------------------------------------------------
-dat <- data.table(read.csv("data/raw/animals.csv", stringsAsFactors = F))
+dat <- data.table(read.csv("data/raw/01_animals.csv", stringsAsFactors = F))
 
 # STEP 01: Look at the data ---------------------------------------------------
 dim(dat)

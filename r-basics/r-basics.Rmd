@@ -245,8 +245,8 @@ head(results)
 # 1.8 Reading in data sets
 [Decapitated Animals Dataset](https://github.com/uselesspress/decapitated-animals-data)
 ```{r reading csv, eval = FALSE}
-dat <- read.csv("../data/raw/animals.csv", stringsAsFactors = F)
-write.csv(dat, "../data/processed/animals.csv", row.names = F)
+dat <- read.csv("../data/raw/01_animals.csv", stringsAsFactors = F)
+write.csv(dat, "../data/processed/01_animals_output.csv", row.names = F)
 ```
 See `decap_analysis.R` for sample analysis
 
