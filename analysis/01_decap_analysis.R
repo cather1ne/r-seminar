@@ -7,7 +7,7 @@ library(ggmap)
 library(RgoogleMaps)
 
 # STEP 00: Import data --------------------------------------------------------
-dat <- data.table(read.csv("data/raw/01_animals.csv", stringsAsFactors = F))
+dat <- data.table(read.csv("../data/raw/01_animals.csv", stringsAsFactors = F))
 
 # STEP 01: Look at the data ---------------------------------------------------
 dim(dat)
@@ -15,6 +15,7 @@ str(dat)
 names(dat)
 unique(dat$animal)
 unique(dat$body_part_found)
+head(dat$complaint_details)
 
 # STEP 02: Clean data ---------------------------------------------------------
 
@@ -46,8 +47,10 @@ dat$animal[grep("&", dat$animal)]
 dat_tmp1 <- rbind(dat_tmp1, dat[grep(",", dat$animal), ])
 dat$animal[grep(",", dat$animal)]
 
+# separate out the entries that are already clean
 dat_tmp2 <- dat[setdiff(dat$key, dat_tmp1$key), ]
 
+# clean and transform
 dat_tmp1$animal <- gsub(", ", " & ", dat_tmp1$animal)
 dat_tmp1$animal <- gsub("and", " & ", dat_tmp1$animal)
 parenthesis_tmp <- gsub("[\\(\\)]", "", regmatches(dat_tmp1$animal, gregexpr("\\(.*?\\)", dat_tmp1$animal)))
@@ -76,6 +79,7 @@ dat_tmp1$animal <- animals
 rm(rep_num, animals, parenthesis_tmp)
 
 # manually review complains for quantities & body parts
+dat_tmp1$complaint_details
 animal_quant <- c(1,1,3,1,2,3,1,1,1,1,1,6,1)
 animal_body_parts <- c("Head and Body",
                        "Head and Body",
